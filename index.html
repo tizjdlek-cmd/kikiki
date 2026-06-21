@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>채소에게 쓰는 편지</title>
+<title>너에게 주는 편지 💌</title>
+
+<!-- ✏️ 링크 공유했을 때(카톡/인스타 등) 뜨는 미리보기 문구. 스포일러 방지용으로 따로 적어둔 것이니 원하면 바꿔도 됩니다 -->
+<meta property="og:title" content="너에게 주는 편지 💌">
+<meta property="og:description" content="잠겨있어요. 비밀번호를 풀어야 볼 수 있어요 🔒">
+<meta name="description" content="잠겨있어요. 비밀번호를 풀어야 볼 수 있어요 🔒">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
@@ -42,7 +48,6 @@
     position:relative;
   }
 
-  /* ===== 배경 점박이 패턴 ===== */
   .bg-dots{
     position:fixed;
     inset:0;
@@ -72,7 +77,6 @@
     50%{ transform:translateY(-18px) rotate(8deg); }
   }
 
-  /* ===== 메인 스테이지 ===== */
   .stage{
     position:relative;
     z-index:1;
@@ -80,7 +84,6 @@
     max-width:480px;
   }
 
-  /* ===== 봉투 카드 ===== */
   .envelope-wrap{
     position:relative;
     perspective:1200px;
@@ -96,7 +99,6 @@
   }
 
   .envelope::before{
-    /* 봉투 윗부분 삼각 플랩 */
     content:"";
     position:absolute;
     top:-2px;
@@ -135,7 +137,6 @@
     margin:0;
   }
 
-  /* ===== 자물쇠 ===== */
   .lock-zone{
     margin:30px auto 6px;
     display:flex;
@@ -242,7 +243,6 @@
     color:#E8748A;
   }
 
-  /* ===== 잠금 해제 시 envelope 사라지는 효과 ===== */
   .envelope-wrap.opened .envelope{
     transform: scale(0.9) translateY(-10px);
     opacity:0;
@@ -258,7 +258,6 @@
     position:absolute;
   }
 
-  /* ===== 편지지 ===== */
   .letter-wrap{
     display:none;
     position:relative;
@@ -292,7 +291,6 @@
   }
 
   .letter-paper::after{
-    /* 좌측 바인더 라인 느낌 */
     content:"";
     position:absolute;
     left:26px;
@@ -354,7 +352,6 @@
     cursor:pointer;
   }
 
-  /* ===== 종이비행기 + 하트 축하 효과 ===== */
   .celebrate-layer{
     position:fixed;
     inset:0;
@@ -438,7 +435,6 @@
 
 <div class="stage">
 
-  <!-- ========== 잠금 화면 (봉투) ========== -->
   <div class="envelope-wrap" id="envelopeWrap">
     <div class="envelope" id="envelope">
       <div class="heading">
@@ -468,23 +464,14 @@
     </div>
   </div>
 
-  <!-- ========== 편지지 (잠금 해제 후) ========== -->
   <div class="letter-wrap" id="letterWrap">
     <div class="letter-paper">
       <div class="letter-stamp">
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-8-5.2-8-11.5C4 6 6.5 4 9.2 4c1.6 0 3 0.8 2.8 2.4C12 4.8 13.4 4 15 4 17.7 4 20 6 20 9.5 20 15.8 12 21 12 21z" fill="#fff"/></svg>
       </div>
 
-      <!-- ✏️ 편지 인사말은 여기서 바꿔주세요 -->
       <p class="letter-greeting" id="letterGreeting">사랑하는 채소에게,</p>
 
-      <!--
-        ============================================================
-        ✏️✏️ 편지 내용은 바로 아래 letterBody 안에 적어주세요 ✏️✏️
-        - 줄바꿈은 그대로 적은 대로 보여집니다 (white-space: pre-line 적용됨)
-        - 따옴표(") 안에 줄바꿈 그대로 넣으면 됩니다
-        ============================================================
-      -->
       <p class="letter-body" id="letterBody">어느덧 우리가 만난 지 3주년이 다 되어가네.
 
 이 편지를 받고 신기했지? 히히.
@@ -509,9 +496,7 @@
 
 3주년 축하해, 똥아!
 앞으로도 잘 부탁해.</p>
-      <!-- ============================================================ -->
 
-      <!-- ✏️ 편지 서명(보내는 사람)도 여기서 바꿔주세요 -->
       <p class="letter-signoff" id="letterSignoff">- 너를 사랑하는 김기똥이 -</p>
     </div>
 
@@ -523,11 +508,7 @@
 <div class="celebrate-layer" id="celebrateLayer"></div>
 
 <script>
-  /* ============================================================
-     ✏️ 여기에 비밀번호 4자리를 설정하세요 (문자열로, 예: "0621")
-     ============================================================ */
   const SECRET_CODE = "5853";
-  /* ============================================================ */
 
   const pinBoxes = Array.from(document.querySelectorAll('.pin-box'));
   const pinRow = document.getElementById('pinRow');
@@ -540,7 +521,6 @@
   const closeBtn = document.getElementById('closeBtn');
   const celebrateLayer = document.getElementById('celebrateLayer');
 
-  // 입력 자동 이동
   pinBoxes.forEach((box, i) => {
     box.addEventListener('input', () => {
       box.value = box.value.replace(/[^0-9]/g, '').slice(0, 1);
@@ -586,7 +566,7 @@
 
   function shakeLock(){
     lockIcon.classList.remove('shake');
-    void lockIcon.offsetWidth; // reflow trick to restart animation
+    void lockIcon.offsetWidth;
     lockIcon.classList.add('shake');
   }
 
